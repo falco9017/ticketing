@@ -8,12 +8,12 @@ WORKDIR /app
 #import ONLY package.json into container
 #this is done so that if this does not change
 #then npm install do not run every time
-COPY package.json .
+COPY ./package.json ./
 #install dependencies
 RUN npm install
 
 #then import the rest of files
-COPY . .
+COPY ./ ./
 
 #default command
 #The CMD instruction has three forms:
