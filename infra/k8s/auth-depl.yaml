@@ -12,13 +12,10 @@ spec:
       labels:
         app: auth
     spec:
-      #you can have multiple docker in one pod
       containers:
         - name: auth
-          image: falco9017/auth
+          image: us.gcr.io/idyllic-formula-279211/auth
 ---
-#separator for another config file
-#this is for the service
 apiVersion: v1
 kind: Service
 metadata:
@@ -26,8 +23,6 @@ metadata:
 spec:
   selector:
     app: auth
-    #default is clusterIP, so type is not necessary
-  type: ClusterIP
   ports:
     - name: auth
       protocol: TCP

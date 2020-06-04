@@ -5,20 +5,16 @@ deploy:
     manifests:
       - ./infra/k8s/*
 build:
-  local:
-    #do not push to dockerhub whenever we build an image
-    #which is the default behav
-    push: false
-
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: idyllic-formula-279211
   artifacts:
-    #image to build
-    - image: falco9017/auth
+    - image: us.gcr.io/idyllic-formula-279211/auth
       context: auth
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
-          #take this files and put it in the dest
           - src: 'src/**/*.ts'
-            #same path inside the container
             dest: .
