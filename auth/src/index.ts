@@ -13,6 +13,10 @@ app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
 
+// app.get('/api/users/test', (req, res) => {
+//   res.send('Hi');
+// });
+
 app.listen(3000, () => {
   console.log('Listening on 3000');
 });
