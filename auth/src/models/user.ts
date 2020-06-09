@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Password } from '../services/password';
 
 //a ts interface for the properties of user
 interface UserAttrs {
@@ -28,6 +29,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+});
+
+//middleware function for operations to do before save
+//we can't use arrow
+userSchema.pre('save', async function (done) {
+  //isModified is true also on first creating the object
+  if (this.isModified('password')) {
+    const hashed = await Password.toHash(this.get('password'));
+    this.set('password', hashed);
+  }
+  done();
 });
 
 //this is a function to make ts work with mongoose
