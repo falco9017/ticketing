@@ -16,6 +16,15 @@ spec:
       containers:
         - name: auth
           image: falco9017/auth
+          #this includes the secret env variable
+          env:
+            #name can be whatever value, in this case
+            #is equal to the key but not necessary
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
 ---
 #separator for another config file
 #this is for the service
