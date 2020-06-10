@@ -10,7 +10,7 @@ WORKDIR /app
 #then npm install do not run every time
 COPY ./package.json ./
 #install dependencies
-RUN npm install
+RUN npm install --only=prod
 
 #then import the rest of files
 COPY ./ ./
