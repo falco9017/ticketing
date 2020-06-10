@@ -11,4 +11,6 @@ export const validateRequest = (
   if (!errors.isEmpty()) {
     throw new RequestValidationError(errors.array());
   }
+  //if we pass the check, call next
+  next();
 };
