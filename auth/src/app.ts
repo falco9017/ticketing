@@ -21,8 +21,8 @@ app.use(
     //we are not encrypting cookie because we send JWT
     //which is already encrypted
     signed: false,
-    //https connection
-    secure: true,
+    //https connection or http if during test
+    secure: process.env.NODE_ENV !== 'test',
   })
 );
 
