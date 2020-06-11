@@ -9,8 +9,13 @@ spec:
   rules:
     - host: ticketing.dev
       http:
+        #incoming request are matched IN ORDER, so wildcard must be last
         paths:
           - path: /api/users/?(.*)
             backend:
               serviceName: auth-srv
+              servicePort: 3000
+          - path: /?(.*)
+            backend:
+              serviceName: client-srv
               servicePort: 3000

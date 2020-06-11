@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      #you can have multiple docker in one pod
+      containers:
+        - name: client
+          image: falco9017/client
+---
+#separator for another config file
+#this is for the service
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-srv
+spec:
+  selector:
+    app: client
+    #default is clusterIP, so type is not necessary
+  type: ClusterIP
+  ports:
+    - name: client
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
