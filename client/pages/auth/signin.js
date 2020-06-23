@@ -1,5 +1,5 @@
 import SignForm from '../../components/SignForm';
 
 export default () => {
-  return <SignForm signType='sigunp' label='Sign Up' />;
+  return <SignForm signType='signin' label='Sign In' />;
 };
