@@ -2,13 +2,14 @@
 //the file redefines the app component
 import 'bootstrap/dist/css/bootstrap.css';
 import buildClient from '../api/build-client';
+import Header from '../components/Header';
 
 //don't call it App
 const AppComponent = ({ Component, pageProps, currentUser }) => {
   console.log(currentUser);
   return (
     <div>
-      <h1>Hello {currentUser.email}</h1>
+      <Header currentUser={currentUser} />
       <Component {...pageProps} />
     </div>
   );
