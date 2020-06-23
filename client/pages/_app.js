@@ -8,7 +8,7 @@ const AppComponent = ({ Component, pageProps, currentUser }) => {
   console.log(currentUser);
   return (
     <div>
-      <h1>Hello {}</h1>
+      <h1>Hello {currentUser.email}</h1>
       <Component {...pageProps} />
     </div>
   );
