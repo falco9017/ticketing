@@ -6,7 +6,6 @@ import Header from '../components/Header';
 
 //don't call it App
 const AppComponent = ({ Component, pageProps, currentUser }) => {
-  console.log(currentUser);
   return (
     <div>
       <Header currentUser={currentUser} />
