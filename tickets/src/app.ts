@@ -9,6 +9,7 @@ import { errorHandler, NotFoundError, currentUser } from '@fflibs/common';
 import { createTicketRouter } from './routes/new';
 import { showTicketRouter } from './routes/show';
 import { indexTicketRouter } from './routes/index';
+import { updateTicketRouter } from './routes/update';
 
 const app = express();
 //this is to work with nginx proxy and https
@@ -30,6 +31,7 @@ app.use(currentUser);
 app.use(createTicketRouter);
 app.use(showTicketRouter);
 app.use(indexTicketRouter);
+app.use(updateTicketRouter);
 
 //if ruote does not exist throw an error
 app.get('*', () => {

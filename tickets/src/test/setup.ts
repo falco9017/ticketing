@@ -42,7 +42,11 @@ afterAll(async () => {
 //global function, but available only for test
 global.signup = () => {
   //build a jwt payload. {id, email}
-  const payload = { id: 'blablabla', email: 'test@test.com' };
+  const payload = {
+    //random id
+    id: new mongoose.Types.ObjectId().toHexString(),
+    email: 'test@test.com',
+  };
 
   //create a jwt
   const token = jwt.sign(payload, process.env.JWT_KEY!);
