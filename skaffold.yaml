@@ -32,3 +32,13 @@ build:
           - src: '**/*.js'
             #same path inside the container
             dest: .
+    - image: falco9017/tickets
+      context: tickets
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          #take this files and put it in the dest
+          - src: 'src/**/*.ts'
+            #same path inside the container
+            dest: .

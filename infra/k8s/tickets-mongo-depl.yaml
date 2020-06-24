@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tickets-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tickets-mongo
+  template:
+    metadata:
+      labels:
+        app: tickets-mongo
+    spec:
+      #you can have multiple docker in one pod
+      containers:
+        - name: tickets-mongo
+          #name of the image comes from dockerhub
+          #in this case we are using an available image
+          image: mongo
+---
+#separator for another config file
+#this is for the service
+apiVersion: v1
+kind: Service
+metadata:
+  name: tickets-mongo-srv
+spec:
+  selector:
+    #this name has to match label of the deployment
+    app: tickets-mongo
+    #default is clusterIP, so type is not necessary
+  type: ClusterIP
+  ports:
+    #just for logging on the terminal
+    - name: db
+      #default mongoDB port
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
