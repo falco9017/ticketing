@@ -4,7 +4,10 @@ import express from 'express';
 import 'express-async-errors';
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
-import { errorHandler, NotFoundError } from '@fflibs/common';
+import { errorHandler, NotFoundError, currentUser } from '@fflibs/common';
+
+import { createTicketRouter } from './routes/new';
+import { showTicketRouter } from './routes/show';
 
 const app = express();
 //this is to work with nginx proxy and https
@@ -19,6 +22,12 @@ app.use(
     secure: process.env.NODE_ENV !== 'test',
   })
 );
+//wire middleware for auth
+app.use(currentUser);
+
+//add routes
+app.use(createTicketRouter);
+app.use(showTicketRouter);
 
 //if ruote does not exist throw an error
 app.get('*', () => {
