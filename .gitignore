@@ -24,3 +24,6 @@ yarn-error.log*
 
 #node modules in subfolders
 node_modules/
+
+#common modules
+common/
