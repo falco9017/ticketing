@@ -11,6 +11,9 @@ declare global {
   }
 }
 
+//to replace the real file with the mock
+jest.mock('../nats-wrapper');
+
 //create a mongodb server and connect with mongoose
 //since tests are running on local machine
 //we need also to define JWT_KEY in env
@@ -27,6 +30,7 @@ beforeAll(async () => {
 
 //delete all collections from previous tests
 beforeEach(async () => {
+  jest.clearAllMocks();
   const collections = await mongoose.connection.db.collections();
   for (let collection of collections) {
     await collection.deleteMany({});
