@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import { app } from './app';
+import { natsWrapper } from './nats-wrapper';
 
 /////STARTING FUNCTION
 //all await async has to be wrapped for older node version
@@ -15,6 +16,18 @@ const start = async () => {
 
   //connect to mongodb
   try {
+    //clusterId is taken from nats-depl.yaml
+    //url is taken from service name and port in yaml file
+    await natsWrapper.connect('ticketing', 'fueveiu', 'http://nats-srv:4222');
+    //handle closing of NATS
+    natsWrapper.client.on('close', () => {
+      console.log('NATS connection closed');
+      process.exit();
+    });
+    //catch interrupt from console and try to close the server
+    process.on('SIGINT', () => natsWrapper.client.close());
+    process.on('SIGTERM', () => natsWrapper.client.close());
+
     await mongoose.connect(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
